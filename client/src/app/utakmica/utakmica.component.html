@@ -1,0 +1,87 @@
+<form [formGroup]="utakmicaForm">
+  <label for="domaci" class="fs-20"
+    >{{ isShowingGosti ? "Gosti" : "Domaci" }} tim:</label
+  >
+  <select
+    id="domaci"
+    name="domaci"
+    formControlName="domaci"
+    required
+    (change)="logSelectedPlayerId()"
+  >
+    <option *ngFor="let igraci of igraci$ | async" [value]="igraci.IgracID">
+      {{ igraci.ime }}
+    </option>
+  </select>
+
+  <button (click)="switchTeamInfo()">
+    Prikazi {{ isShowingGosti ? "domacine" : "goste" }}
+  </button>
+
+  <ng-container *ngIf="authenticated">
+    <div class="button-container">
+      <a
+        routerLink="/utakmice"
+        class="nav-link text-uppercase text-white fs-22 fw-6 ls-1"
+      >
+        <button
+          *ngIf="!isShowingGosti"
+          class="large-button"
+          (click)="setSelectedPlayerId('DomacinGo')"
+        >
+          Postavi DomacinGo
+        </button>
+        <button
+          *ngIf="isShowingGosti"
+          class="large-button"
+          (click)="setSelectedPlayerId('GostGo')"
+        >
+          Postavi GostGo
+        </button>
+        <button
+          *ngIf="!isShowingGosti"
+          class="large-button"
+          (click)="setSelectedPlayerId('DomacinCrveni')"
+        >
+          Postavi DomacinCrveni
+        </button>
+        <button
+          *ngIf="isShowingGosti"
+          class="large-button"
+          (click)="setSelectedPlayerId('GostCrveni')"
+        >
+          Postavi GostCrveni
+        </button>
+
+        <button
+          *ngIf="!isShowingGosti"
+          class="large-button"
+          (click)="setSelectedPlayerId('DomacinZuti')"
+        >
+          Postavi DomacinZuti
+        </button>
+        <button
+          *ngIf="isShowingGosti"
+          class="large-button"
+          (click)="setSelectedPlayerId('GostZuti')"
+        >
+          Postavi GostZuti
+        </button>
+        <button
+          *ngIf="!isShowingGosti"
+          class="large-button"
+          (click)="setSelectedPlayerId('AsistencijaDomacin')"
+        >
+          Postavi AsistencijaDomacin
+        </button>
+        <button
+          *ngIf="isShowingGosti"
+          class="large-button"
+          (click)="setSelectedPlayerId('AsistencijaGost')"
+        >
+          Postavi AsistencijaGost
+        </button>
+      </a>
+    </div>
+  </ng-container>
+</form>

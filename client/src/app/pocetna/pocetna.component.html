@@ -1,0 +1,51 @@
+<ng-container *ngIf="authenticated">
+  <form (submit)="addLiga()" [formGroup]="form">
+    <label for="drzava" class="fs-20">Drzava:</label>
+    <textarea
+      type="text"
+      id="drzava"
+      name="drzava"
+      formControlName="drzava"
+      required
+    ></textarea>
+
+    <label for="godinaosnivanja" class="fs-20">Godina osnivanja:</label>
+    <input
+      type="number"
+      id="godinaosnivanja"
+      name="godinaosnivanja"
+      formControlName="godinaosnivanja"
+      required
+    />
+
+    <label for="imelige" class="fs-20">Ime lige:</label>
+    <textarea
+      type="text"
+      id="imelige"
+      name="imelige"
+      formControlName="imelige"
+      required
+    ></textarea>
+
+    <button type="submit">Dodaj ligu</button>
+  </form>
+</ng-container>
+
+<div class="leagues-container">
+  <div *ngFor="let liga of lige$ | async; let i = index" class="anime-item">
+    <div class="anime-item-info with-border">
+      <p class="anime-item-info-item title">
+        {{ liga.imelige }}
+      </p>
+      <p class="anime-item-info-item genre">
+        Godina osnivanja: {{ liga.godinaosnivanja }}
+      </p>
+      <a
+        [routerLink]="['/timovi', liga.liga_id]"
+        class="nav-link text-uppercase text-black fs-22 fw-6 ls-1"
+      >
+        Detalji
+      </a>
+    </div>
+  </div>
+</div>
